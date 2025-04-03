@@ -34,7 +34,7 @@ from reportlab.lib.colors import black, white, gray
 
 nltk.download("vader_lexicon")
 
-YOUTUBE_API_KEY = "AIzaSyDqiXJ12BEFcnlXferZRExPSkje7uUITgg"
+YOUTUBE_API_KEY = ""
 
 # Extract video ID from YouTube URL
 def extract_video_id(url):
@@ -161,9 +161,9 @@ def extract_keywords(reviews):
 
 
 # Fetch Reddit profile details (Placeholder)
-REDDIT_CLIENT_ID = "Rja93s7WRvIzazu7NrK6gw"
-REDDIT_CLIENT_SECRET = "m9mrfrIOgjj6OZRnDoKO5ApRuxNSAQ"
-REDDIT_USER_AGENT = "centimo/1.0 by u/siddharth1910"
+REDDIT_CLIENT_ID = ""
+REDDIT_CLIENT_SECRET = ""
+REDDIT_USER_AGENT = ""
 
 # Initialize Reddit API client
 reddit_api = praw.Reddit(
