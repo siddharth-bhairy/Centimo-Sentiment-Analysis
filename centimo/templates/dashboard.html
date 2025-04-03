@@ -1,0 +1,133 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="{% static 'dashboard.css' %}">
+  <script src="{% static 'navbar.js' %}" defer></script> 
+</head>
+<body>
+
+  <!-- Navbar -->
+  <button class="menu-btn" onclick="toggleNav()">Menu</button>
+  <div id="myNav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <div class="nav-options">
+      <a href="{% url 'url' %}">Analyze</a>
+      <a href="{% url 'logout' %}">Logout</a> 
+      <a href="#">About</a>
+      <a href="{% url 'contact' %}">Contact</a>
+    </div>
+  </div>
+
+  <!-- Welcome Message -->
+  <h1 class="welcome">Welcome, {{ user.name }}</h1>
+  <p class="last-login">Last Login: {{ last_login|default:"N/A" }}</p>
+
+  <div class="dashboard-container">
+    
+    <!-- YouTube Profile Box -->
+    <div class="box">
+      <h2>YouTube Profile</h2>
+      {% if user.youtube_profile_pic %}
+        <img src="{{ user.youtube_profile_pic }}" alt="YouTube Profile Picture" class="profile-pic">
+      {% else %}
+        <p>No profile picture available.</p>
+      {% endif %}
+      
+      <p><strong>Channel:</strong> {{ user.youtube_channel_name|default:"N/A" }}</p>
+      <p><strong>Subscribers:</strong> {{ user.youtube_subscribers|default:"N/A" }}</p>
+      <p><strong>Total Videos:</strong> {{ user.youtube_total_videos|default:"N/A" }}</p>
+      <p><strong>Total Views:</strong> {{ user.youtube_total_views|default:"N/A" }}</p>
+
+      <!-- Recent Upload -->
+      {% if user.youtube_latest_upload_title %}
+        <div class="recent-upload">
+          <h3>Recent Upload</h3>
+          <a href="{{ user.youtube_latest_upload_url }}" target="_blank">
+            <img src="{{ user.youtube_latest_upload_thumbnail }}" alt="Recent Video Thumbnail" class="video-thumbnail">
+          </a>
+          <p>{{ user.youtube_latest_upload_title }}</p>
+        </div>
+      {% else %}
+        <p>No recent uploads available.</p>
+      {% endif %}
+    </div>
+
+    <!-- Reddit Profile Box -->
+    <div class="box">
+      <h2>Reddit Profile</h2>
+      {% if user.reddit_profile_pic %}
+        <img src="{{ user.reddit_profile_pic }}" alt="Reddit Profile Picture" class="profile-pic">
+      {% else %}
+        <p>No profile picture available.</p>
+      {% endif %}
+      
+      <p><strong>Username:</strong> u/{{ user.reddit_username|default:"N/A" }}</p>
+      <p><strong>Account Age:</strong> {{ user.reddit_account_age|default:"N/A" }} days</p>
+      <p><strong>Awards Received:</strong> {{ user.reddit_awards_received|default:"N/A" }}</p>
+      <p><strong>Karma:</strong> {{ user.reddit_karma|default:"N/A" }}</p>
+    
+      <!-- Recent Reddit Post -->
+      {% if user.reddit_recent_post_title %}
+        <div class="recent-upload">
+          <h3>Recent Post</h3>
+          <a href="{{ user.reddit_recent_post_url }}" target="_blank">
+            <img src="{{ user.reddit_recent_post_image }}" alt="Recent Reddit Post" class="video-thumbnail">
+          </a>
+          <p>{{ user.reddit_recent_post_title }}</p>
+        </div>
+      {% else %}
+        <p>No recent posts available.</p>
+      {% endif %}
+    </div>
+    
+
+  </div>
+
+  <!-- Google Play Store Insights -->
+  <h2 class="section-title">Google Play Store Trends</h2>
+<div class="dashboard-container">
+  
+  <!-- Top Trending Apps -->
+  <div class="box">
+    <h3>Top Trending Apps</h3>
+    {% if playstore and playstore.trending_apps %}
+      <ul class="app-list">
+        {% for app in playstore.trending_apps %}
+          <li>
+            <img src="{{ app.icon }}" alt="App Icon" class="app-icon">
+            <p><strong>{{ app.name }}</strong></p>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No trending apps available.</p>
+    {% endif %}
+  </div>
+
+  <!-- Rising Apps -->
+  <div class="box">
+    <h3>Rising Apps in {{ playstore.category|default:"Popular" }}</h3>
+    {% if playstore and playstore.rising_apps %}
+      <ul class="app-list">
+        {% for app in playstore.rising_apps %}
+          <li>
+            <img src="{{ app.icon }}" alt="App Icon" class="app-icon">
+            <p><strong>{{ app.name }}</strong></p>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No rising apps available.</p>
+    {% endif %}
+  </div>
+
+</div>
+
+  </div>
+
+</body>
+</html>

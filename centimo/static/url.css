@@ -1,0 +1,249 @@
+/* Basic reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Full screen video background */
+.video-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.video-background video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Centered image container */
+.image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+  margin-top: 3vh;
+}
+
+.image-container img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 10px;
+}
+
+/* Display Messages */
+.messages {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.message {
+  padding: 15px 20px;
+  font-size: 18px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 800px;
+  text-align: center;
+  font-weight: bold;
+  backdrop-filter: blur(10px);
+}
+
+/* Different message types */
+.message.success {
+  background: rgba(0, 255, 0, 0.2);
+  border: 2px solid rgba(0, 255, 0, 0.5);
+  color: #0f0;
+}
+
+.message.error {
+  background: rgba(255, 0, 0, 0.2);
+  border: 2px solid rgba(255, 0, 0, 0.5);
+  color: #f00;
+}
+
+/* Text Field Container */
+.textfield-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+  width: 100%;
+}
+
+.textfield-container form {
+  display: flex;
+  width: 90%;
+  max-width: 900px;
+  gap: 10px;
+}
+
+/* Glassmorphism Text Field */
+.textfield {
+  flex: 1;
+  padding: 16px;
+  font-size: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50px;
+  backdrop-filter: blur(10px);
+  outline: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: 0.3s ease;
+}
+
+.textfield::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.textfield:focus {
+  border-color: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Submit Button */
+.submit-btn {
+  padding: 16px 25px;
+  font-size: 18px;
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50px;
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.submit-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Menu Button */
+.menu-btn {
+  font-size: 30px;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 15px 25px;
+  border: none;
+  cursor: pointer;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  border-radius: 50px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+  z-index: 20;
+}
+
+.menu-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Side Navbar */
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  box-shadow: -2px 0px 10px rgba(0, 0, 0, 0.2);
+  transition: 0.5s;
+  padding-top: 60px;
+  overflow: hidden;
+  border-radius: 20px 0 0 20px;
+}
+
+.sidenav .nav-options {
+  display: none;
+  flex-direction: column;
+}
+
+.sidenav a {
+  padding: 16px 32px;
+  text-decoration: none;
+  font-size: 22px;
+  color: #fff;
+  display: block;
+  transition: 0.3s ease;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.sidenav a:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: translateX(10px);
+}
+
+/* Close Button */
+.sidenav .closebtn {
+  font-size: 36px;
+  color: #fff;
+  position: absolute;
+  top: 0;
+  left: 25px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Adjust the main content when the navbar is open */
+body.sidenav-open {
+  overflow: hidden;
+}
+
+/* Spinner */
+.spinner {
+  display: none;
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-top: 4px solid #fff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-top: 15px;
+  align-self: center;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Glassmorphism Blur Effect */
+.blur-background {
+  backdrop-filter: blur(15px);
+  pointer-events: none;
+}
+
+
+/* Media Query for Smaller Screens */
+@media screen and (max-width: 768px) {
+  .textfield-container form {
+    width: 95%;
+  }
+
+  .textfield {
+    font-size: 18px;
+    padding: 14px;
+  }
+
+  .submit-btn {
+    padding: 14px 20px;
+    font-size: 16px;
+  }
+}

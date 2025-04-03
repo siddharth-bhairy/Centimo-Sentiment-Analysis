@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Glassmorphism Contact Us Form</title>
+  <link rel="stylesheet" href="{% static 'contact.css' %}">
+  <script src="{% static 'navbar.js' %}" defer></script>
+</head>
+<body>
+
+  <!-- Video Background -->
+  <div class="video-background">
+    <video autoplay loop muted>
+      <source src="{% static 'providing.MP4' %}" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+  <div class="wrapper">
+    <form action="{% url 'contact' %}" method="POST">
+      {% csrf_token %}
+      <h2>Contact Us</h2>
+
+      <div class="input-field">
+        <label for="name">Enter your name</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+
+      <div class="input-field">
+        <label for="email">Enter your email</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+
+      <div class="input-field">
+        <label for="comments">Enter your feedback</label>
+        <textarea id="comments" name="comments" rows="5" required></textarea>
+      </div>
+
+      <button type="submit">Send Message</button>
+    </form>
+  </div>
+
+  <!-- Menu Button -->
+  <button class="menu-btn" onclick="toggleNav()">Menu</button>
+
+  <!-- Sidebar Navbar -->
+  <div id="myNav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <div class="nav-options">
+      <a href="{% url 'dashboard' %}">Dashboard</a>
+      <a href="{% url 'url' %}">Analyze</a>
+      <a href="#">About</a>
+      <a href="{% url 'contact' %}">Contact</a>
+      <a href="{% url 'logout' %}">Logout</a>  <!-- Logout Option Added -->
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,125 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Analysis Result</title>
+  <link rel="stylesheet" href="{% static 'result.css' %}">
+  <link rel="stylesheet" href="{% static 'dashboard.css' %}">
+  <script src="{% static 'navbar.js' %}" defer></script> 
+</head>
+<body>
+
+  <!-- Navbar -->
+  <button class="menu-btn" onclick="toggleNav()">Menu</button>
+  <div id="myNav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <div class="nav-options">
+      <a href="{% url 'dashboard' %}">Dashboard</a>
+      <a href="{% url 'url' %}">Analyze Again</a>
+      <a href="{% url 'logout' %}">Logout</a>
+      <a href="#">About</a>
+      <a href="{% url 'contact' %}">Contact</a>
+    </div>
+  </div>
+
+  <!-- Results Section -->
+  <h1 class="welcome">Analysis Results</h1>
+
+  <!-- Display Link to the Analyzed Source -->
+  <p class="last-login">
+    {% if source == "YouTube" %}
+      YouTube Video: <a href="{{ url }}" target="_blank">Click here</a>
+    {% elif source == "Reddit" %}
+      Reddit Post: <a href="{{ url }}" target="_blank">Click here</a>
+    {% elif source == "Google Play Store" %}
+      Google Play Store App: <a href="{{ url }}" target="_blank">Click here</a>
+    {% endif %}
+  </p>
+
+  <div class="dashboard-container">
+    <!-- Sentiment Breakdown -->
+    <div class="box">
+      <h2>Sentiment Breakdown</h2>
+      <p><strong>Positive:</strong> {{ sentiment_counts.Positive|default:"0" }}</p>
+      <p><strong>Neutral:</strong> {{ sentiment_counts.Neutral|default:"0" }}</p>
+      <p><strong>Negative:</strong> {{ sentiment_counts.Negative|default:"0" }}</p>
+    </div>
+
+    <!-- Percentage of Sentiments -->
+    <div class="box">
+      <h2>Sentiment Percentage</h2>
+      <p><strong>Positive:</strong> {{ sentiment_percentages.Positive|default:"0" }}%</p>
+      <p><strong>Neutral:</strong> {{ sentiment_percentages.Neutral|default:"0" }}%</p>
+      <p><strong>Negative:</strong> {{ sentiment_percentages.Negative|default:"0" }}%</p>
+    </div>
+
+    <!-- Spam Count -->
+    <div class="box">
+      <h2>Spam Comments</h2>
+      <p><strong>Spam Detected:</strong> {{ spam_count|default:"0" }}</p>
+    </div>
+
+    <!-- Total Comments -->
+    <div class="box">
+      <h2>Total Comments</h2>
+      <p><strong>Count:</strong> {{ total_comments|default:"0" }}</p>
+    </div>
+
+    <!-- Detected Languages -->
+    <div class="box">
+      <h2>Languages Detected</h2>
+      <ul>
+        {% for lang, count in lang_counts.items %}
+          <li><strong>{{ lang }}</strong>: {{ count }} comments</li>
+        {% empty %}
+          <li>No languages detected.</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+
+  <!-- Pie Chart & Word Cloud -->
+  <div class="dashboard-container">
+    {% if chart %}
+    <div class="large-box">
+      <h2>Sentiment Analysis</h2>
+      <img src="data:image/png;base64,{{ chart }}" alt="Sentiment Chart" class="profile-pi">
+    </div>
+    {% endif %}
+    
+    {% if wordcloud %}
+    <div class="large-box">
+      <h2>Word Cloud</h2>
+      <img src="data:image/png;base64,{{ wordcloud }}" alt="Word Cloud" class="profile-pi">
+    </div>
+    {% endif %}
+  </div>
+
+  <!-- Summary -->
+  <div class="summary-box">
+    <h2>Summary</h2>
+    <p>{{ summary|default:"No summary available." }}</p>
+  </div>
+
+  <!-- Download Report -->
+  <div class="download-container">
+    <form method="post" action="{% url 'download_pdf' %}">
+      {% csrf_token %}
+      <input type="hidden" name="source" value="{{ source }}">
+      <input type="hidden" name="url" value="{{ url }}">
+      <input type="hidden" name="positive" value="{{ sentiment_counts.Positive|default:'0' }}">
+      <input type="hidden" name="neutral" value="{{ sentiment_counts.Neutral|default:'0' }}">
+      <input type="hidden" name="negative" value="{{ sentiment_counts.Negative|default:'0' }}">
+      <input type="hidden" name="spam_count" value="{{ spam_count|default:'0' }}">
+      <input type="hidden" name="total_comments" value="{{ total_comments|default:'0' }}">
+      <input type="hidden" name="summary" value="{{ summary|default:'No summary available.' }}">
+      <input type="hidden" name="chart" value="{{ chart }}">
+      <input type="hidden" name="wordcloud" value="{{ wordcloud }}">
+      <button type="submit" class="download-btn">Download Analysis Report (PDF)</button>
+    </form>
+  </div>
+
+</body>
+</html>

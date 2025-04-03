@@ -1,0 +1,41 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family:'Arial';
+    background-image:url("hd.jpg");
+    background-repeat:no-repeat;
+    background-size:cover;
+    color: white;
+}
+
+.container {
+    text-align: center;
+    padding: 20px;
+}
+
+h1 {
+    font-family:cursive;
+    font-size: 120px;
+    mmargin-top: 10px;
+}
+
+p {
+    font-size: 1.2em;
+    line-height: 1.5;
+    margin: 0 20px 20px;
+};
+
+.timings {
+    margin-bottom: 20px;
+}
+
+.timings h2 {
+    font-size: 2em;
+    margin-bottom: 30px;
+    text-shadow:2px 4px 4px black;
+}
+
+.timings p {
+    font-size: 1.2em;
+    margin: 5px 0;
+}

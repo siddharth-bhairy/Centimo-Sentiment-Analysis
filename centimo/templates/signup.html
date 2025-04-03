@@ -1,0 +1,158 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Glassmorphism Sign Up Form</title>
+  <link rel="stylesheet" href="{% static 'signup.css' %}">
+</head>
+<body>
+
+  <!-- Video Background -->
+  <div class="video-background">
+    <video autoplay loop muted playsinline>
+      <source src="{% static 'providing.MP4' %}" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+  <div class="wrapper">
+    <form method="POST" action="{% url 'signup' %}" onsubmit="return validateForm()">
+      {% csrf_token %}
+
+      <!-- Error Messages -->
+      {% if messages %}
+        <div class="error-messages">
+          {% for message in messages %}
+            <p style="color: red;">{{ message }}</p>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      <h2>Sign Up</h2>
+
+      <div class="input-field">
+        <input type="text" id="name" name="name" value="{{ request.POST.name }}" required>
+        <label>Enter your username</label>
+        <p class="error-message" id="name-error" style="color: red; display: none;">Username must be at least 3 characters</p>
+      </div>
+      
+      <div class="input-field">
+        <input type="email" id="email" name="email" value="{{ request.POST.email }}" required>
+        <label>Enter your email</label>
+        <p class="error-message" id="email-error" style="color: red; display: none;">Invalid email format</p>
+      </div>
+      
+      <div class="input-field">
+        <input type="text" id="youtube" name="youtube" value="{{ request.POST.youtube }}" required>
+        <label>Enter YouTube Homepage Link</label>
+        <p class="error-message" id="youtube-error" style="color: red; display: none;">Invalid YouTube URL</p>
+      </div>
+      
+      <div class="input-field">
+        <input type="text" id="reddit" name="reddit" value="{{ request.POST.reddit }}" required>
+        <label>Enter Reddit Profile Link</label>
+        <p class="error-message" id="reddit-error" style="color: red; display: none;">Invalid Reddit profile URL</p>
+      </div>
+      
+      <div class="input-field">
+        <input type="password" id="password" name="password" required>
+        <label>Enter your password</label>
+
+        <p class="error-message" id="password-error" style="color: red; display: none;">Password does not meet the requirements</p>
+    </div>
+    
+      
+      <div class="input-field">
+        <input type="password" id="confirm_password" name="confirm_password" required>
+        <label>Confirm your password</label>
+        <p class="error-message" id="confirm-password-error" style="color: red; display: none;">Passwords do not match</p>
+      </div>
+      
+      <button type="submit">Sign Up</button>
+      
+      <div class="login-link">
+        <p>Already have an account? <a href="{% url 'login' %}">Log In</a></p>
+      </div>
+      
+    </form>
+  </div>
+
+  <script>
+    function validateForm() {
+        let name = document.getElementById("name").value;
+        let email = document.getElementById("email").value;
+        let youtube = document.getElementById("youtube").value;
+        let reddit = document.getElementById("reddit").value;
+        let password = document.getElementById("password").value;
+        let confirmPassword = document.getElementById("confirm_password").value;
+
+        let nameError = document.getElementById("name-error");
+        let emailError = document.getElementById("email-error");
+        let youtubeError = document.getElementById("youtube-error");
+        let redditError = document.getElementById("reddit-error");
+        let passwordError = document.getElementById("password-error");
+        let confirmPasswordError = document.getElementById("confirm-password-error");
+
+        let isValid = true;
+
+        // Username validation (minimum 3 characters)
+        if (name.length < 3) {
+            nameError.style.display = "block";
+            isValid = false;
+        } else {
+            nameError.style.display = "none";
+        }
+
+        // Email validation
+        let emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        if (!emailPattern.test(email)) {
+            emailError.style.display = "block";
+            isValid = false;
+        } else {
+            emailError.style.display = "none";
+        }
+
+        // YouTube URL validation
+        let youtubePattern = /^(https?:\/\/)?(www\.)?(youtube\.com\/(channel|c|user)\/|youtube\.com\/@|youtube\.com\/watch\?v=|youtu\.be\/).+/;
+        if (!youtubePattern.test(youtube)) {
+            youtubeError.style.display = "block";
+            isValid = false;
+        } else {
+            youtubeError.style.display = "none";
+        }
+
+        // Reddit Profile URL validation
+        let redditPattern = /^(https?:\/\/)?(www\.)?reddit\.com\/user\/[a-zA-Z0-9_-]+\/?$/;
+        if (!redditPattern.test(reddit)) {
+            redditError.style.display = "block";
+            isValid = false;
+        } else {
+            redditError.style.display = "none";
+        }
+
+        // Password validation (minimum 6 characters, one uppercase, one lowercase, one number, one special character)
+        let passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+        if (!passwordPattern.test(password)) {
+           passwordError.style.display = "block";
+           isValid = false;
+        } else {
+            passwordError.style.display = "none";
+        }
+
+
+        // Confirm password validation
+        if (password !== confirmPassword) {
+            confirmPasswordError.style.display = "block";
+            isValid = false;
+        } else {
+            confirmPasswordError.style.display = "none";
+        }
+
+        return isValid;
+    }
+  </script>
+
+</body>
+</html>

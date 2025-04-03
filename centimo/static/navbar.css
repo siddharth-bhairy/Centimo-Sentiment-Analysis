@@ -1,0 +1,95 @@
+/* Basic styling for body and menu button */
+body {
+    font-family: "Arial", sans-serif;
+    margin: 0;
+    padding: 0;
+    background:url("background.JPG");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+  }
+  
+  /* Menu Button Styling with Glassmorphism Effect */
+  .menu-btn {
+    font-size: 30px;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1); /* Transparent background */
+    backdrop-filter: blur(10px); /* Glassmorphism effect */
+    padding: 15px 25px;
+    border: none;
+    cursor: pointer;
+    position: fixed;
+    top: 20px;
+    right: 20px; /* Move the Menu button to the rightmost side */
+    border-radius: 50px; /* Round the corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+  }
+  
+  /* Change Menu button appearance on hover */
+  .menu-btn:hover {
+    background: rgba(255, 255, 255, 0.2); /* Slightly darker when hovered */
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Side Navbar Styling with Glassmorphism Effect */
+  .sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    right: 0; /* Right-side navbar */
+    background: rgba(255, 255, 255, 0.1); /* Transparent background */
+    backdrop-filter: blur(10px); /* Glassmorphism Effect */
+    box-shadow: -2px 0px 10px rgba(0, 0, 0, 0.2); /* Shadow on the left */
+    transition: 0.5s;
+    padding-top: 60px;
+    overflow: hidden;
+    border-radius: 20px 0 0 20px; /* Rounded corners on the sidebar */
+  }
+  
+  .sidenav .nav-options {
+    display: none; /* Hide navigation links by default */
+    flex-direction: column;
+  }
+  
+  .sidenav a {
+    padding: 16px 32px;
+    text-decoration: none;
+    font-size: 22px;
+    color: #fff;
+    display: block;
+    transition: 0.3s ease;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  .sidenav a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateX(10px);
+  }
+  
+  /* Close Button Styling */
+  .sidenav .closebtn {
+    font-size: 36px;
+    color: #fff;
+    position: absolute;
+    top: 0;
+    left: 25px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  /* Adjust the main content when the navbar is open */
+  body.sidenav-open {
+    overflow: hidden;
+  }
+  
+  /* Media query for responsiveness */
+  @media screen and (max-height: 450px) {
+    .sidenav a {
+      font-size: 18px;
+    }
+  }
+  

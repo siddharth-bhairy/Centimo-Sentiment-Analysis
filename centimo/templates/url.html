@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video Background with Glassmorphism</title>
+  <link rel="stylesheet" href="{% static 'url.css' %}">
+  <script src="{% static 'navbar.js' %}" defer></script> 
+</head>
+<body>
+
+  <!-- Navbar -->
+  <button class="menu-btn" onclick="toggleNav()">Menu</button>
+  <div id="myNav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <div class="nav-options">
+      <a href="{% url 'dashboard' %}">Dashboard</a>
+      <a href="{% url 'logout' %}">Logout</a> 
+      <a href="#">About</a>
+      <a href="{% url 'contact' %}">Contact</a>
+    </div>
+  </div>
+
+  <!-- Video Background -->
+  <div class="video-background">
+    <video autoplay muted loop>
+      <source src="{% static 'providing.MP4' %}" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+  <!-- Center Image -->
+  <div class="image-container">
+    <img src="{% static 'url.PNG' %}" alt="Centered Image">
+  </div>
+
+  <!-- Display Django Messages -->
+  {% if messages %}
+    <div class="messages">
+      {% for message in messages %}
+        <p class="message {% if message.tags %}{{ message.tags }}{% endif %}">{{ message }}</p>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <!-- Text Field with Submit Button -->
+  <div class="textfield-container" id="form-container">
+    <form method="POST" action="{% url 'url' %}" onsubmit="showSpinner()">
+      {% csrf_token %}
+      <input type="text" name="url" placeholder="Enter your URL here" class="textfield">
+      <button type="submit" class="submit-btn">Submit</button>
+      <div id="spinner" class="spinner"></div>
+    </form>
+  </div>
+
+  <script>
+    function showSpinner() {
+      document.getElementById("spinner").style.display = "block";
+      document.getElementById("form-container").classList.add("blur-background");
+    }
+  </script>
+
+</body>
+</html>

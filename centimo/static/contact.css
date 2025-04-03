@@ -1,0 +1,199 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@200;300;400;500;600;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Open Sans", sans-serif;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+  padding: 0 10px;
+  overflow: hidden; /* Prevent scrolling */
+  position: relative;
+}
+
+/* Video Background */
+.video-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* Position the video behind the content */
+}
+
+video {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+/* Wrapper Style */
+.wrapper {
+  width: 320px; /* Reduced width */
+  padding: 25px;
+  text-align: center;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 1;
+}
+
+/* Form Style */
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+h2 {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  color: #fff;
+}
+
+.input-field {
+  margin: 10px 0;
+  text-align: left;
+}
+
+.input-field label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 15px;
+  color: #fff;
+}
+
+.input-field input,
+.input-field textarea {
+  width: 100%;
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  outline: none;
+  font-size: 14px;
+  color: #fff;
+  padding: 8px;
+  border-radius: 6px;
+}
+
+.input-field textarea {
+  height: 100px; /* Adjusted height */
+  resize: none;
+}
+
+.input-field input:focus,
+.input-field textarea:focus {
+  border-color: #fff;
+}
+
+button {
+  background: #fff;
+  color: #000;
+  font-weight: 600;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 15px;
+  border: 2px solid transparent;
+  transition: 0.3s ease;
+  margin-top: 10px;
+}
+
+button:hover {
+  color: #fff;
+  border-color: #fff;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* Menu Button Styling */
+.menu-btn {
+  font-size: 26px;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 12px 22px;
+  border: none;
+  cursor: pointer;
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  border-radius: 50px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+}
+
+.menu-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Sidebar Navbar */
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  box-shadow: -2px 0px 10px rgba(0, 0, 0, 0.2);
+  transition: 0.5s;
+  padding-top: 50px;
+  overflow: hidden;
+  border-radius: 20px 0 0 20px;
+}
+
+.sidenav .nav-options {
+  display: none;
+  flex-direction: column;
+}
+
+.sidenav a {
+  padding: 12px 25px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #fff;
+  display: block;
+  transition: 0.3s ease;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.sidenav a:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: translateX(10px);
+}
+
+/* Close Button */
+.sidenav .closebtn {
+  font-size: 32px;
+  color: #fff;
+  position: absolute;
+  top: 0;
+  left: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .wrapper {
+    width: 90%;
+    padding: 20px;
+  }
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav a {
+    font-size: 18px;
+  }
+}

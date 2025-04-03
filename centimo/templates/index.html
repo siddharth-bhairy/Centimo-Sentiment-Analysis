@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Centimo Page</title>
+  <link rel="stylesheet" href="{% static 'index1.css' %}">
+  <script src="{% static 'navbar.js' %}" defer></script>
+</head>
+<body>
+  
+  <!-- Container for the main content -->
+  <div class="container">
+    <!-- Left image -->
+    <div class="left-image">
+      <img src="{% static 'IntroCentimo.PNG' %}" alt="Left Image">
+    </div>
+  </div>
+
+  <!-- Right bottom image -->
+  <div class="right-bottom-image">
+    <img src="{% static 'bottom.PNG' %}" alt="Right Bottom Image">
+  </div>
+
+  <!-- Try Centimo Button -->
+  {% comment %} <a href="#">
+    <button class="try-button">Try Centimo</button>
+  </a> {% endcomment %}
+
+  <!-- Menu Button -->
+  <button class="menu-btn" onclick="toggleNav()">Menu</button>
+
+  <!-- Sidebar Navbar -->
+  <div id="myNav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <div class="nav-options">
+      <a href="#">Home</a>
+      <a href="{% url "login" %}">Login</a>
+      <a href="{% url "signup" %}">Sign In</a>
+      <a href="#">About</a>
+      <a href="#">Contact</a>
+    </div>
+  </div>
+
+</body>
+</html>

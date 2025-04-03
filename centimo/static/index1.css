@@ -1,0 +1,162 @@
+/* Apply a no-repeat background to the entire page */
+body {
+    margin: 0;
+    padding: 0;
+    background: url('background.JPG') no-repeat center center fixed;
+    background-size: cover;
+    font-family: Arial, sans-serif;
+}
+
+/* Container holding both images */
+.container {
+    display: flex;
+    height: 100vh;
+    align-items: flex-start; /* Align items to the top to prevent cutting off */
+    position: relative;
+    width: 90%; /* Reduce the container size */
+    margin: 0 auto; /* Center the container */
+}
+
+/* Left image styling */
+.left-image {
+    width: 45%; /* Adjust width to occupy less space */
+    height: 60%;
+    position: fixed;
+    top: 25%; /* Move the left image lower */
+    left: 0;
+    z-index: 1; /* Ensure the left image appears under the menu button */
+}
+
+.left-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* New div with image at the right-bottom corner */
+.right-bottom-image {
+    position: fixed;
+    bottom: 25%; /* Move the image further up */
+    right: 5%; /* Move the image slightly to the left */
+    width: 50%; /* Increase width */
+    height: 50%; /* Increase height */
+    overflow: hidden;
+    border-radius: 10px;
+    z-index: 10; /* Keep it above the left image */
+}
+
+.right-bottom-image img {
+    width: 100%; /* Ensure the image fits the container */
+    height: 100%;
+    object-fit: contain; /* Ensure the entire image fits the container */
+    object-position: center; /* Ensure the image stays centered */
+}
+
+/* Button styling */
+.try-button {
+    position: fixed;
+    bottom: 10%; /* Position the button at the bottom of the page */
+    left: 10%; /* Position the button on the left side */
+    padding: 20px 40px;
+    background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent white */
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.5); /* Subtle border */
+    border-radius: 50px;
+    font-size: 24px; /* Increase font size for a bigger button */
+    cursor: pointer;
+    backdrop-filter: blur(10px); /* Apply blur for the glass effect */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    opacity: 0.8;
+    transition: opacity 0.3s ease, transform 0.4s ease;
+}
+
+.try-button:hover {
+    opacity: 1;
+    transform: scale(1.1); /* Slightly enlarge on hover */
+}
+
+/* Menu Button Styling with Glassmorphism Effect */
+.menu-btn {
+    font-size: 30px;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1); /* Transparent background */
+    backdrop-filter: blur(10px); /* Glassmorphism effect */
+    padding: 15px 25px;
+    border: none;
+    cursor: pointer;
+    position: fixed;
+    top: 20px;
+    right: 20px; /* Move the Menu button to the rightmost side */
+    border-radius: 50px; /* Round the corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+    z-index: 20; /* Ensure the menu button is always on top */
+}
+
+/* Change Menu button appearance on hover */
+.menu-btn:hover {
+    background: rgba(255, 255, 255, 0.2); /* Slightly darker when hovered */
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Side Navbar Styling with Glassmorphism Effect */
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    right: 0; /* Right-side navbar */
+    background: rgba(255, 255, 255, 0.1); /* Transparent background */
+    backdrop-filter: blur(10px); /* Glassmorphism Effect */
+    box-shadow: -2px 0px 10px rgba(0, 0, 0, 0.2); /* Shadow on the left */
+    transition: 0.5s;
+    padding-top: 60px;
+    overflow: hidden;
+    border-radius: 20px 0 0 20px; /* Rounded corners on the sidebar */
+}
+
+.sidenav .nav-options {
+    display: none; /* Hide navigation links by default */
+    flex-direction: column;
+}
+
+.sidenav a {
+    padding: 16px 32px;
+    text-decoration: none;
+    font-size: 22px;
+    color: #fff;
+    display: block;
+    transition: 0.3s ease;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.sidenav a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateX(10px);
+}
+
+/* Close Button Styling */
+.sidenav .closebtn {
+    font-size: 36px;
+    color: #fff;
+    position: absolute;
+    top: 0;
+    left: 25px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Adjust the main content when the navbar is open */
+body.sidenav-open {
+    overflow: hidden;
+}
+
+/* Media query for responsiveness */
+@media screen and (max-height: 450px) {
+    .sidenav a {
+        font-size: 18px;
+    }
+}

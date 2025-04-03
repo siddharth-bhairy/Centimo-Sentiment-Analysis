@@ -1,0 +1,89 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Glassmorphism Login Form | CodingNepal</title>
+  <link rel="stylesheet" href="{% static 'login.css' %}">
+</head>
+<body>
+  <!-- Video Background -->
+  <div class="video-background">
+    <video autoplay loop muted>
+      <source src="{% static 'providing.MP4' %}" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+  <div class="wrapper">
+    <form action="{% url 'login' %}" method="POST" onsubmit="return validateForm()">
+      {% csrf_token %}
+      <h2>Login</h2>
+      
+      <!-- Display messages if they exist -->
+      {% if messages %}
+        <div class="messages">
+          {% for message in messages %}
+            <p class="error">{{ message }}</p>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      <div class="input-field">
+        <input type="text" id="email" name="email" required>
+        <label>Enter your email</label>
+        <p id="email-error" class="error-message" style="color: red; display: none;">Invalid email format</p>
+      </div>
+      
+      <div class="input-field">
+        <input type="password" id="password" name="password" required>
+        <label>Enter your password</label>
+        <p id="password-error" class="error-message" style="color: red; display: none;">Password must be at least 6 characters</p>
+      </div>
+
+      <div class="forget">
+        <label for="remember">
+          <input type="checkbox" id="remember">
+          <p>Remember me</p>
+        </label>
+        <a href="#">Forgot password?</a>
+      </div>
+      <button type="submit">Log In</button>
+      <div class="register">
+        <p>Don't have an account? <a href="#">Register</a></p>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    function validateForm() {
+        let email = document.getElementById("email").value;
+        let password = document.getElementById("password").value;
+        let emailError = document.getElementById("email-error");
+        let passwordError = document.getElementById("password-error");
+
+        let emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        let isValid = true;
+
+        // Validate Email
+        if (!emailPattern.test(email)) {
+            emailError.style.display = "block";
+            isValid = false;
+        } else {
+            emailError.style.display = "none";
+        }
+
+        // Validate Password Length
+        if (password.length < 6) {
+            passwordError.style.display = "block";
+            isValid = false;
+        } else {
+            passwordError.style.display = "none";
+        }
+
+        return isValid;
+    }
+  </script>
+</body>
+</html>
